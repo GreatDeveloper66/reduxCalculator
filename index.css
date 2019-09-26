@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Nova+Square|Share+Tech+Mono&display=swap");
-/* line 14, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 19, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .genericDisplay, .heading, .board, .footer {
   display: grid;
   grid-template: 1;
   justify-items: center;
   align-items: center; }
 
-/* line 17, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 22, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .genericSizing, .heading, .board, .footer {
   width: 100%;
   height: 100%;
   margin: 3px;
   padding: 3px; }
 
-/* line 20, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 25, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 :root {
   --backgroundColor: #5c5858;
   --shadowColor: rgba(114, 110, 109, 0.5);
@@ -21,14 +21,14 @@
   --headingFont: 'Nova Square', cursive;
   --numFont: 'Share Tech Mono', monospace; }
 
-/* line 28, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 33, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 body {
   display: grid;
   grid-template: 1;
   justify-items: center;
   align-items: center; }
 
-/* line 32, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 37, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .calculator {
   display: grid;
   grid-template: 50px 1fr 50px/1fr;
@@ -42,15 +42,16 @@ body {
   border-radius: 4px;
   box-shadow: 0 0 6px 6px var(--shadowColor); }
 
-/* line 40, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 45, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .heading, .board, .footer {
   border: 3px solid red; }
 
-/* line 46, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 51, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .heading h1 {
-  font-size: 20px;
+  font-family: var(--headingFont);
+  font-size: 22px;
+  color: var(--headingBlack);
   text-align: center;
-  color: var(--headingblack);
   text-transform: uppercase; }
 
 /*# sourceMappingURL=index.css.map */

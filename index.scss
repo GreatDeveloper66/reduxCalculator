@@ -11,6 +11,11 @@
   margin: $margin;
   padding: $padding;
 }
+@mixin fonts($family,$size,$color){
+  font-family: $family;
+  font-size: $size;
+  color: $color;
+}
 .genericDisplay {
   @include display(1fr/1fr,center,center);
 }
@@ -44,9 +49,8 @@ body {
 }
 .heading {
   h1 {
-    font-size: 20px;
+    @include fonts(var(--headingFont),22px,var(--headingBlack));
     text-align:center;
-    color: var(--headingblack);
     text-transform: uppercase;
   }
 }
