@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/GreatDeveloper66/reduxCalculator/issues"
   },
-  "homepage": "https://github.com/GreatDeveloper66/reduxCalculator#readme"
+  "homepage": "https://github.com/GreatDeveloper66/reduxCalculator#readme",
+  "dependencies": {
+    "sass": "^1.22.12"
+  }
 }
