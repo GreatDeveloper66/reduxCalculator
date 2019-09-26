@@ -1,11 +1,16 @@
-/* line 14, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 13, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+:root {
+  --backgroundColor: #5c5858;
+  --shadowColor: rgba(114, 110, 109, 0.5); }
+
+/* line 18, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 body {
   display: grid;
   grid-template: 1;
   justify-items: center;
   align-items: center; }
 
-/* line 18, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 22, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .calculator {
   display: grid;
   grid-template: 50px 1fr 50px/1fr;
@@ -15,6 +20,12 @@ body {
   height: 450px;
   margin: 3px;
   padding: 3px;
-  background-color: red; }
+  background-color: var(--backgroundColor);
+  border-radius: 4px;
+  box-shadow: 0 0 6px 6px var(--shadowColor); }
+
+/* line 30, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+.heading, .board, .footer {
+  border: 3px solid red; }
 
 /*# sourceMappingURL=index.css.map */

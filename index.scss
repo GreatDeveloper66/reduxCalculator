@@ -10,6 +10,10 @@
   margin: $margin;
   padding: $padding;
 }
+:root {
+  --backgroundColor: rgba(92,88,88,1);
+  --shadowColor: rgba(114, 110, 109, 0.5);
+}
 
 body {
   @include display(1fr/1fr,center,center);
@@ -18,5 +22,11 @@ body {
 .calculator {
   @include display(50px 1fr 50px/1fr, center, center);
   @include sizing(300px,450px,3px,3px);
-  background-color: red;
+  background-color: var(--backgroundColor);
+  border-radius: 4px;
+  box-shadow: 0 0 6px 6px var(--shadowColor);
+}
+
+.heading, .board,.footer {
+  border: 3px solid red;
 }
