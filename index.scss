@@ -24,10 +24,12 @@
 }
 :root {
   --backgroundColor: rgba(92,88,88,1);
-  --shadowColor: rgba(114, 110, 109, 0.5);
+  --shadowColor: rgba(114, 110, 109, 0.65);
   --headingBlack: rgba(43,27,23,1);
   --borderColor: rgba(12,9,10,1);
   --displayColor: rgba(78,137,117,0.9);
+  --keyColor: rgba(253,238,244,1);
+  --keyborderColor: rgba(209,208,206,1);
   --headingFont: 'Nova Square', cursive;
   --numFont: 'Share Tech Mono', monospace;
 }
@@ -35,7 +37,7 @@ body {
   @include display(1fr/1fr,center,center);
 }
 .calculator {
-  @include display(50px 1fr 50px/1fr, center, center);
+  @include display(50px 1fr 30px/1fr, center, center);
   @include sizing(300px,450px,3px,3px);
   background-color: var(--backgroundColor);
   border-radius: 4px;
@@ -63,7 +65,7 @@ body {
   @extend .genericSizing;
 }
 .userBoard{ 
-  @include display(1fr 3fr/1fr, center, center);
+  @include display(1fr 4fr/1fr, center, center);
   @include sizing(90%,95%,3px,3px);
   border-radius: 15px;
   border: 3px solid var(--borderColor);
@@ -74,4 +76,17 @@ body {
   border-radius: 15px;
   border: 3px solid var(--borderColor);
   background-color: var(--displayColor);
+}
+.keyBoard {
+  @include display(repeat(5,1fr)/repeat(4,1fr),center,center);
+  @include sizing(95%,90%,3px,3px);
+  border: 3px solid blue;
+}
+.key {
+  @extend .genericDisplay;
+  @include sizing(70%,70%,3px,3px);
+  border-radius: 10px;
+  border: 2px solid var(--keyborderColor);
+  background-color: var(--keyColor);
+  box-shadow: 3px 3px var(--shadowColor);
 }
