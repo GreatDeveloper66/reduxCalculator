@@ -1,0 +1,22 @@
+@mixin display($template,$justify,$align) {
+  display: grid;
+  grid-template: $template;
+  justify-items:$justify;
+  align-items: $align;
+}
+@mixin sizing($width,$height,$margin,$padding){
+  width: $width;
+  height: $height;
+  margin: $margin;
+  padding: $padding;
+}
+
+body {
+  @include display(1fr/1fr,center,center);
+}
+
+.calculator {
+  @include display(50px 1fr 50px/1fr, center, center);
+  @include sizing(300px,600px,3px,3px);
+  background-color: red;
+}
