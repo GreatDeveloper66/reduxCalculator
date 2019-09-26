@@ -78,7 +78,7 @@ body {
 .numDisplay {
   display: grid;
   grid-template: 4fr 1fr/1fr;
-  justify-items: end;
+  justify-items: center;
   align-items: center;
   width: 80%;
   height: 80%;
@@ -97,18 +97,42 @@ body {
   width: 95%;
   height: 90%;
   margin: 3px;
-  padding: 3px;
-  border: 3px solid blue; }
+  padding: 3px; }
 
-/* line 85, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 84, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .key {
   width: 70%;
   height: 70%;
   margin: 3px;
   padding: 3px;
+  font-family: var(--numFont);
+  font-size: 20px;
+  color: var(--headingBlack);
   border-radius: 10px;
   border: 2px solid var(--keyborderColor);
   background-color: var(--keyColor);
   box-shadow: 3px 3px var(--shadowColor); }
+
+/* line 93, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+.topDisplay {
+  display: grid;
+  grid-template: 1;
+  justify-items: end;
+  align-items: center;
+  font-family: var(--numFont);
+  font-size: 25px;
+  color: var(--headingBlack);
+  border: 3px solid red; }
+
+/* line 98, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+.bottomDisplay {
+  display: grid;
+  grid-template: 1;
+  justify-items: end;
+  align-items: center;
+  font-family: var(--numFont);
+  font-size: 10px;
+  color: var(--headingBlack);
+  border: 3px solid red; }
 
 /*# sourceMappingURL=index.css.map */

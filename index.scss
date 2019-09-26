@@ -71,7 +71,7 @@ body {
   border: 3px solid var(--borderColor);
 }
 .numDisplay {
-  @include display(4fr 1fr/1fr, end, center);
+  @include display(4fr 1fr/1fr, center, center);
   @include sizing(80%, 80%, 2px, 2px);
   border-radius: 15px;
   border: 3px solid var(--borderColor);
@@ -80,13 +80,23 @@ body {
 .keyBoard {
   @include display(repeat(5,1fr)/repeat(4,1fr),center,center);
   @include sizing(95%,90%,3px,3px);
-  border: 3px solid blue;
 }
 .key {
   @extend .genericDisplay;
   @include sizing(70%,70%,3px,3px);
+  @include fonts(var(--numFont),20px,var(--headingBlack));
   border-radius: 10px;
   border: 2px solid var(--keyborderColor);
   background-color: var(--keyColor);
   box-shadow: 3px 3px var(--shadowColor);
+}
+.topDisplay{
+  @include display(1fr/1fr,end,center);
+  @include fonts(var(--numFont),25px,var(--headingBlack));
+  border:3px solid red;
+}
+.bottomDisplay {
+  @include display(1fr/1fr,end,center);
+  @include fonts(var(--numFont),10px,var(--headingBlack));
+  border: 3px solid red;
 }
