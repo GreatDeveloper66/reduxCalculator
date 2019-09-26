@@ -21,14 +21,14 @@
   --headingFont: 'Nova Square', cursive;
   --numFont: 'Share Tech Mono', monospace; }
 
-/* line 33, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 32, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 body {
   display: grid;
   grid-template: 1;
   justify-items: center;
   align-items: center; }
 
-/* line 37, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 35, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .calculator {
   display: grid;
   grid-template: 50px 1fr 50px/1fr;
@@ -42,16 +42,19 @@ body {
   border-radius: 4px;
   box-shadow: 0 0 6px 6px var(--shadowColor); }
 
-/* line 45, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
-.heading, .board, .footer {
-  border: 3px solid red; }
-
-/* line 51, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 47, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .heading h1 {
   font-family: var(--headingFont);
-  font-size: 22px;
+  font-size: 24px;
   color: var(--headingBlack);
   text-align: center;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  margin: 0 auto 0 auto; }
+
+/* line 55, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+.footer p {
+  font-family: var(--headingFont);
+  font-size: 12px;
+  color: var(--headingBlack); }
 
 /*# sourceMappingURL=index.css.map */

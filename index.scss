@@ -29,11 +29,9 @@
   --headingFont: 'Nova Square', cursive;
   --numFont: 'Share Tech Mono', monospace;
 }
-
 body {
   @include display(1fr/1fr,center,center);
 }
-
 .calculator {
   @include display(50px 1fr 50px/1fr, center, center);
   @include sizing(300px,450px,3px,3px);
@@ -41,17 +39,24 @@ body {
   border-radius: 4px;
   box-shadow: 0 0 6px 6px var(--shadowColor);
 }
-
 .heading,.board,.footer {
   @extend .genericDisplay;
   @extend .genericSizing;
-  border: 3px solid red;
 }
 .heading {
   h1 {
-    @include fonts(var(--headingFont),22px,var(--headingBlack));
+    @include fonts(var(--headingFont),24px,var(--headingBlack));
     text-align:center;
     text-transform: uppercase;
+    margin: 0 auto 0 auto;
   }
 }
-
+.footer {
+  p {
+    @include fonts(var(--headingFont),12px,var(--headingBlack));
+  }
+}
+.board {
+  @extend .genericDisplay;
+  @extend .genericSizing;
+}
