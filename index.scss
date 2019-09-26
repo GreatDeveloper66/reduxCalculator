@@ -10,6 +10,12 @@
   margin: $margin;
   padding: $padding;
 }
+.genericDisplay {
+  @include display(1fr/1fr,center,center);
+}
+.genericSizing {
+  @include sizing(100%,100%,3px,3px);
+}
 :root {
   --backgroundColor: rgba(92,88,88,1);
   --shadowColor: rgba(114, 110, 109, 0.5);
@@ -27,6 +33,9 @@ body {
   box-shadow: 0 0 6px 6px var(--shadowColor);
 }
 
-.heading, .board,.footer {
+.heading,.board,.footer {
+  @extend .genericDisplay;
+  @extend .genericSizing;
   border: 3px solid red;
 }
+
