@@ -5,6 +5,11 @@
 /*jshint esversion:6*/
 window.onload = () => {
 
+  Array.from(document.querySelector(".keys")).addEventListener("click", function () {
+    const newKey = this.querySelector("p").innerHTML;
+    store.dispatch(addKey(newKey));
+  });
+
   function buttonPressed(state, action) {
     if (typeof state === 'undefined') {
       return 0;
@@ -12,20 +17,30 @@ window.onload = () => {
     switch (action.type) {
       case 'ADD':
         return Object.assign({}, state, {
-          keysPressed: [...state.keysPressed, action.keyPressed]
+          keysPressed: action.keyPressed
         });
       default:
         return state;
     }
   }
+
+  function addKey(key) {
+    return {
+      type: 'ADD',
+      keyPressed: key
+    };
+  }
+  
+  function render() {
+    document.getElementById("topNum").innerHTML = store.getState().keyPressed;
+    document.getElementById("bottomNum").innerHTML = store.getState().keyPressed;
+  }
+
+  let store = Redux.createStore(buttonPressed);
+  store.subscribe(render);
 };
 
-function addKey(key){
-  return {
-    type: 'ADD',
-    keyPressed: key
-  };
-}
+
 /*
 function counter(state, action) {
       if (typeof state === 'undefined') {
