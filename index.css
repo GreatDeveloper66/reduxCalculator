@@ -22,17 +22,18 @@
   --displayColor: rgba(78, 137, 117, 0.9);
   --keyColor: #fdeef4;
   --keyborderColor: #d1d0ce;
+  --eraseKey: rgba(247, 93, 89, 0.9);
   --headingFont: 'Nova Square', cursive;
   --numFont: 'Share Tech Mono', monospace; }
 
-/* line 36, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 37, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 body {
   display: grid;
   grid-template: 1;
   justify-items: center;
   align-items: center; }
 
-/* line 39, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 40, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .calculator {
   display: grid;
   grid-template: 50px 1fr 30px/1fr;
@@ -46,7 +47,7 @@ body {
   border-radius: 4px;
   box-shadow: 0 0 6px 6px var(--shadowColor); }
 
-/* line 51, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 52, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .heading h1 {
   font-family: var(--headingFont);
   font-size: 24px;
@@ -55,13 +56,13 @@ body {
   text-transform: uppercase;
   margin: 0 auto 0 auto; }
 
-/* line 59, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 60, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .footer p {
   font-family: var(--headingFont);
   font-size: 12px;
   color: var(--headingBlack); }
 
-/* line 67, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 68, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .userBoard {
   display: grid;
   grid-template: 1fr 4fr/1fr;
@@ -74,7 +75,7 @@ body {
   border-radius: 15px;
   border: 3px solid var(--borderColor); }
 
-/* line 73, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 74, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .numDisplay {
   display: grid;
   grid-template: auto 15px/1fr;
@@ -88,7 +89,7 @@ body {
   border: 3px solid var(--borderColor);
   background-color: var(--displayColor); }
 
-/* line 80, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 81, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .keyBoard {
   display: grid;
   grid-template: repeat(5, 1fr)/repeat(4, 1fr);
@@ -99,7 +100,7 @@ body {
   margin: 3px;
   padding: 3px; }
 
-/* line 84, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 85, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .key {
   width: 70%;
   height: 70%;
@@ -113,7 +114,11 @@ body {
   background-color: var(--keyColor);
   box-shadow: 3px 3px var(--shadowColor); }
 
-/* line 93, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 94, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+.erase {
+  background-color: var(--eraseKey); }
+
+/* line 97, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .topDisplay {
   display: grid;
   grid-template: 1;
@@ -123,7 +128,7 @@ body {
   height: 90%;
   margin: 2px;
   padding: 2px; }
-  /* line 97, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+  /* line 101, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
   .topDisplay p {
     margin: auto;
     margin-right: 0;
@@ -132,7 +137,7 @@ body {
     font-size: 25px;
     color: var(--headingBlack); }
 
-/* line 104, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 108, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .bottomDisplay {
   display: grid;
   grid-template: 1;
@@ -142,7 +147,7 @@ body {
   height: 90%;
   margin: 1px;
   padding: 1px; }
-  /* line 107, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+  /* line 111, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
   .bottomDisplay p {
     margin: auto;
     margin-right: 0;

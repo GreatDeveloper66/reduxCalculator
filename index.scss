@@ -30,6 +30,7 @@
   --displayColor: rgba(78,137,117,0.9);
   --keyColor: rgba(253,238,244,1);
   --keyborderColor: rgba(209,208,206,1);
+  --eraseKey: rgba(247, 93, 89, 0.9);
   --headingFont: 'Nova Square', cursive;
   --numFont: 'Share Tech Mono', monospace;
 }
@@ -89,6 +90,9 @@ body {
   border: 2px solid var(--keyborderColor);
   background-color: var(--keyColor);
   box-shadow: 3px 3px var(--shadowColor);
+}
+.erase {
+  background-color: var(--eraseKey);
 }
 .topDisplay{
   @include display(1fr/1fr,end,center);
