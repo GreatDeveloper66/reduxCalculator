@@ -113,12 +113,16 @@ body {
   border: 2px solid var(--keyborderColor);
   background-color: var(--keyColor);
   box-shadow: 3px 3px var(--shadowColor); }
+  /* line 93, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+  .key:hover {
+    cursor: pointer;
+    filter: brightness(-25%); }
 
-/* line 94, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 98, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .erase {
   background-color: var(--eraseKey); }
 
-/* line 97, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 101, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .topDisplay {
   display: grid;
   grid-template: 1;
@@ -128,7 +132,7 @@ body {
   height: 90%;
   margin: 2px;
   padding: 2px; }
-  /* line 101, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+  /* line 105, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
   .topDisplay p {
     margin: auto;
     margin-right: 0;
@@ -137,7 +141,7 @@ body {
     font-size: 25px;
     color: var(--headingBlack); }
 
-/* line 108, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+/* line 112, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
 .bottomDisplay {
   display: grid;
   grid-template: 1;
@@ -147,7 +151,7 @@ body {
   height: 90%;
   margin: 1px;
   padding: 1px; }
-  /* line 111, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
+  /* line 115, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
   .bottomDisplay p {
     margin: auto;
     margin-right: 0;

@@ -90,6 +90,10 @@ body {
   border: 2px solid var(--keyborderColor);
   background-color: var(--keyColor);
   box-shadow: 3px 3px var(--shadowColor);
+  &:hover {
+    cursor: pointer;
+    filter: brightness(-25%);
+  }
 }
 .erase {
   background-color: var(--eraseKey);

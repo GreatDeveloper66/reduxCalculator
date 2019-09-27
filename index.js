@@ -3,11 +3,16 @@
 /*global setTimeout*/
 /*global window*/
 /*jshint esversion:6*/
-window.onload = () => {
+/*global console*/
 
-  Array.from(document.querySelector(".keys")).addEventListener("click", function () {
-    const newKey = this.querySelector("p").innerHTML;
-    store.dispatch(addKey(newKey));
+window.onload = () => {
+console.log("hello");
+let arr = Array.from(document.querySelectorAll('.key'));
+
+ arr.forEach(function(elem) {
+    elem.addEventListener("click", function () {
+      store.dispatch(addKey(this.innerText));
+    });
   });
 
   function buttonPressed(state, action) {
@@ -30,7 +35,7 @@ window.onload = () => {
       keyPressed: key
     };
   }
-  
+
   function render() {
     document.getElementById("topNum").innerHTML = store.getState().keyPressed;
     document.getElementById("bottomNum").innerHTML = store.getState().keyPressed;
@@ -42,52 +47,69 @@ window.onload = () => {
 
 
 /*
-function counter(state, action) {
-      if (typeof state === 'undefined') {
-        return 0;
-      }
+window.onload = () => {
 
-      switch (action.type) {
-        case 'INCREMENT':
-          return state + 1;
-        case 'DECREMENT':
-          return state - 1;
-        default:
-          return state;
-      }
+  function counter(state, action) {
+    if (typeof state === 'undefined') {
+      return 0;
     }
 
-    var store = Redux.createStore(counter);
-    var valueEl = document.getElementById('value');
-
-    function render() {
-      valueEl.innerHTML = store.getState().toString();
+    switch (action.type) {
+      case 'INCREMENT':
+        return state + 1;
+      case 'DECREMENT':
+        return state - 1;
+      default:
+        return state;
     }
+  }
 
-    render();
-    store.subscribe(render);
+  var store = Redux.createStore(counter);
+  var valueEl = document.getElementById('value');
 
-    document.getElementById('increment')
-      .addEventListener('click', function () {
-        store.dispatch({ type: 'INCREMENT' });
+  function render() {
+    valueEl.innerHTML = store.getState().toString();
+  }
+
+  render();
+  store.subscribe(render);
+
+  document.getElementById('increment')
+    .addEventListener('click', function () {
+      store.dispatch({
+        type: 'INCREMENT'
       });
+    });
 
-    document.getElementById('decrement')
-      .addEventListener('click', function () {
-        store.dispatch({ type: 'DECREMENT' });
+  document.getElementById('decrement')
+    .addEventListener('click', function () {
+      store.dispatch({
+        type: 'DECREMENT'
       });
+    });
 
-    document.getElementById('incrementIfOdd')
-      .addEventListener('click', function () {
-        if (store.getState() % 2 !== 0) {
-          store.dispatch({ type: 'INCREMENT' });
-        }
-      });
+  document.getElementById('incrementIfOdd')
+    .addEventListener('click', function () {
+      if (store.getState() % 2 !== 0) {
+        store.dispatch({
+          type: 'INCREMENT'
+        });
+      }
+    });
 
-    document.getElementById('incrementAsync')
-      .addEventListener('click', function () {
-        setTimeout(function () {
-          store.dispatch({ type: 'INCREMENT' });
-        }, 1000);
-      });
-      */
+  document.getElementById('incrementAsync')
+    .addEventListener('click', function () {
+      setTimeout(function () {
+        store.dispatch({
+          type: 'INCREMENT'
+        });
+      }, 1000);
+    });
+
+
+
+
+
+
+};
+*/
