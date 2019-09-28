@@ -7,11 +7,17 @@
 
 window.onload = () => {
 
-  Array.from(document.querySelectorAll('.key')).forEach(function (elem) {
+  Array.from(document.querySelectorAll('.numeral')).forEach(function (elem) {
     elem.addEventListener("click", function () {
       store.dispatch(addKey(this.innerText));
     });
   });
+  
+  document.querySelector(".erase").addEventListener("click",function(){
+    store.dispatch(erase(this.innerText));
+  });
+                                                    
+                                                    
 
   function buttonPressed(state, action) {
     if (typeof state === 'undefined') {
@@ -25,6 +31,15 @@ window.onload = () => {
           topDisplay: [...state.keysPressed, action.keyPressed].join(''),
           bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
         });
+      case 'ERASE':
+        return Object.assign({}, state, {
+          keyPressed: action.keyPressed,
+          keysPressed: [...state.keysPressed, action.keyPressed],
+          topDisplay: ['0'],
+          bottomDisplay: ['0']
+        });
+          
+     
       default:
         return state;
     }
@@ -33,6 +48,13 @@ window.onload = () => {
   function addKey(key) {
     return {
       type: 'ADD',
+      keyPressed: key
+    };
+  }
+
+  function erase(key){
+    return {
+      type: 'ERASE',
       keyPressed: key
     };
   }
@@ -51,8 +73,8 @@ window.onload = () => {
 
   let store = Redux.createStore(buttonPressed, initialState);
   store.subscribe(render);
-};
 
+};
 
 /*
 window.onload = () => {
