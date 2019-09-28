@@ -6,10 +6,8 @@
 /*global console*/
 
 window.onload = () => {
-console.log("hello");
-let arr = Array.from(document.querySelectorAll('.key'));
 
- arr.forEach(function(elem) {
+  Array.from(document.querySelectorAll('.key')).forEach(function (elem) {
     elem.addEventListener("click", function () {
       store.dispatch(addKey(this.innerText));
     });
@@ -22,7 +20,10 @@ let arr = Array.from(document.querySelectorAll('.key'));
     switch (action.type) {
       case 'ADD':
         return Object.assign({}, state, {
-          keysPressed: action.keyPressed
+          keyPressed: action.keyPressed,
+          keysPressed: [...state.keysPressed, action.keyPressed],
+          topDisplay: [...state.keysPressed, action.keyPressed].join(''),
+          bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
         });
       default:
         return state;
@@ -37,11 +38,18 @@ let arr = Array.from(document.querySelectorAll('.key'));
   }
 
   function render() {
-    document.getElementById("topNum").innerHTML = store.getState().keyPressed;
-    document.getElementById("bottomNum").innerHTML = store.getState().keyPressed;
+    document.getElementById("topNum").innerHTML = store.getState().topDisplay;
+    document.getElementById("bottomNum").innerHTML = store.getState().bottomDisplay;
   }
 
-  let store = Redux.createStore(buttonPressed);
+  let initialState = {
+    keyPressed: '0',
+    keysPressed: [],
+    topDisplay: '0',
+    bottomDisplay: '0'
+  };
+
+  let store = Redux.createStore(buttonPressed, initialState);
   store.subscribe(render);
 };
 
