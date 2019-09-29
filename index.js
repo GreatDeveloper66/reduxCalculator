@@ -20,7 +20,7 @@ window.onload = () => {
   document.querySelector(".zero").addEventListener("click", function () {
     store.dispatch(addZero(this.innerText));
   });
-  document.querySelector(".period").addEventListener("click", function() {
+  document.querySelector(".period").addEventListener("click", function () {
     store.dispatch(addPeriod(this.innerText));
   });
 
@@ -51,17 +51,23 @@ window.onload = () => {
           bottomDisplay: '0'
         });
       case 'BSPACE':
-        return Object.assign({}, state, {
-          keyPressed: action.keyPressed,
-          keysPressed: [...state.keysPressed.slice(0, -1)],
-          topDisplay: state.topDisplay.slice(0, -1),
-          bottomDisplay: state.bottomDisplay.slice(0, -1)
-        });
+        return state.topDisplay.length === 1 ? Object.assign({}, state, {
+            keyPressed: action.keyPressed,
+            keysPressed: [],
+            topDisplay: '0',
+            bottomDisplay: '0'
+          }) :
+          Object.assign({}, state, {
+            keyPressed: action.keyPressed,
+            keysPressed: [...state.keysPressed.slice(0, -1)],
+            topDisplay: state.topDisplay.slice(0, -1),
+            bottomDisplay: state.bottomDisplay.slice(0, -1)
+          });
       case 'PERIOD':
         return state.topDisplay.includes('.') ? state : state.topDisplay === '0' ?
           Object.assign({}, state, {
             keyPressed: action.keyPressed,
-            keysPressed: ['0','.'],
+            keysPressed: ['0', '.'],
             topDisplay: '0.',
             bottomDisplay: '0.'
           }) :
@@ -103,8 +109,8 @@ window.onload = () => {
       keyPressed: key
     };
   }
-  
-  function addPeriod(key){
+
+  function addPeriod(key) {
     return {
       type: 'PERIOD',
       keyPressed: key
