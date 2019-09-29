@@ -20,6 +20,9 @@ window.onload = () => {
   document.querySelector(".zero").addEventListener("click", function () {
     store.dispatch(addZero(this.innerText));
   });
+  document.querySelector(".period").addEventListener("click", function() {
+    store.dispatch(addPeriod(this.innerText));
+  });
 
   function buttonPressed(state, action) {
     if (typeof state === 'undefined') {
@@ -54,6 +57,20 @@ window.onload = () => {
           topDisplay: state.topDisplay.slice(0, -1),
           bottomDisplay: state.bottomDisplay.slice(0, -1)
         });
+      case 'PERIOD':
+        return state.topDisplay.includes('.') ? state : state.topDisplay === '0' ?
+          Object.assign({}, state, {
+            keyPressed: action.keyPressed,
+            keysPressed: ['0','.'],
+            topDisplay: '0.',
+            bottomDisplay: '0.'
+          }) :
+          Object.assign({}, state, {
+            keyPressed: action.keyPressed,
+            keysPressed: [...state.keysPressed, action.keyPressed],
+            topDisplay: [...state.keysPressed, action.keyPressed].join(''),
+            bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+          });
       default:
         return state;
     }
@@ -83,6 +100,13 @@ window.onload = () => {
   function addZero(key) {
     return {
       type: 'ADDZERO',
+      keyPressed: key
+    };
+  }
+  
+  function addPeriod(key){
+    return {
+      type: 'PERIOD',
       keyPressed: key
     };
   }
