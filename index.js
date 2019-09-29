@@ -1,4 +1,5 @@
 /*global Redux*/
+/*global combineReducers*/
 /*global document*/
 /*global setTimeout*/
 /*global window*/
@@ -22,6 +23,9 @@ window.onload = () => {
   });
   document.querySelector(".period").addEventListener("click", function () {
     store.dispatch(addPeriod(this.innerText));
+  });
+  document.querySelector(".add").addEventListener("click", function () {
+    store.dispatch(addPlus(this.innerText));
   });
 
   function buttonPressed(state, action) {
@@ -77,10 +81,36 @@ window.onload = () => {
             topDisplay: [...state.keysPressed, action.keyPressed].join(''),
             bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
           });
+      case 'ADDITION':
+        return Object.assign({}, state, {
+          keyPressed: action.keyPressed,
+          keysPressed: [],
+          topDisplay: ['0'],
+          bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+        });
       default:
         return state;
     }
   }
+  /*
+    function operatorReducer(state, action) {
+      if (typeof state === 'undefined') {
+        return 0;
+      }
+      switch (action.type) {
+        case 'ADDITION':
+          return Object.assign({}, state, {
+              keyPressed: action.keyPressed,
+              keysPressed: [...state.keysPressed, action.keyPressed],
+              bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+            }
+          );
+
+        default:
+          return state;
+      }
+    }
+    */
 
   function addKey(key) {
     return {
@@ -117,17 +147,26 @@ window.onload = () => {
     };
   }
 
+  function addPlus(key) {
+    return {
+      type: 'ADDITION',
+      keyPressed: key
+    };
+  }
+
+
   function render() {
     document.getElementById("topNum").innerHTML = store.getState().topDisplay;
     document.getElementById("bottomNum").innerHTML = store.getState().bottomDisplay;
   }
-  let initialState = {
+
+  const initialState = {
     keyPressed: '',
     keysPressed: [],
     topDisplay: '0',
     bottomDisplay: '0'
   };
-  let store = Redux.createStore(buttonPressed, initialState);
+  const store = Redux.createStore(buttonPressed, initialState);
   store.subscribe(render);
 
 };
