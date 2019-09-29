@@ -16,6 +16,10 @@ window.onload = () => {
   document.querySelector(".erase").addEventListener("click",function(){
     store.dispatch(erase(this.innerText));
   });
+  
+  document.querySelector(".bspace").addEventListener("click",function(){
+    store.dispatch(bspace(this.innerText));
+  });
                                                     
                                                     
 
@@ -35,8 +39,15 @@ window.onload = () => {
         return Object.assign({}, state, {
           keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed],
-          topDisplay: ['0'],
-          bottomDisplay: ['0']
+          topDisplay: '0',
+          bottomDisplay: '0'
+        });
+      case 'BSPACE':
+        return Object.assign({}, state, {
+          keyPressed: action.keyPressed,
+          keysPressed: [...state.keysPressed, action.keyPressed],
+          topDisplay: state.topDisplay.slice(0,-1),
+          bottomDisplay: state.bottomDisplay.slice(0,-1)
         });
           
      
@@ -55,6 +66,13 @@ window.onload = () => {
   function erase(key){
     return {
       type: 'ERASE',
+      keyPressed: key
+    };
+  }
+  
+  function bspace(key){
+    return {
+      type: 'BSPACE',
       keyPressed: key
     };
   }
