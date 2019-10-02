@@ -37,56 +37,65 @@ window.onload = () => {
         return Object.assign({}, state, {
           keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed],
-          topDisplay: [...state.keysPressed, action.keyPressed].join(''),
-          bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+          currentNumber: [...state.currentNumber, action.keyPressed].join(''),
+          topDisplay: [...state.currentNumber, action.keyPressed].join(''),
+          bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
+          expression: [...state.keysPressed, action.keyPressed].join('')
         });
       case 'ADDZERO':
         return state.topDisplay === '0' ? state : Object.assign({}, state, {
           keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed],
+          currentNumber: [...state.currentNumber,action.keyPressed].join(''),
           topDisplay: [...state.keysPressed, action.keyPressed].join(''),
-          bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+          bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
+          expression: [...state.keysPressed,action.keyPressed].join('')
         });
       case 'ERASE':
-        return Object.assign({}, state, {
-          keyPressed: action.keyPressed,
-          keysPressed: [],
-          topDisplay: '0',
-          bottomDisplay: '0'
-        });
+        return initialState;
       case 'BSPACE':
         return state.topDisplay.length === 1 ? Object.assign({}, state, {
             keyPressed: action.keyPressed,
-            keysPressed: [],
+            currentNumber: '0',
+            keysPressed: [...state.bottomDisplay],
             topDisplay: '0',
-            bottomDisplay: '0'
+            bottomDisplay: '0',
+            expression: state.expression
           }) :
           Object.assign({}, state, {
             keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed.slice(0, -1)],
+            currentNumber: [...state.currentNumber.slice(0,-1)],
             topDisplay: state.topDisplay.slice(0, -1),
-            bottomDisplay: state.bottomDisplay.slice(0, -1)
+            bottomDisplay: state.bottomDisplay.slice(0, -1),
+            expression: state.bottomDisplay
           });
       case 'PERIOD':
         return state.topDisplay.includes('.') ? state : state.topDisplay === '0' ?
           Object.assign({}, state, {
             keyPressed: action.keyPressed,
             keysPressed: ['0', '.'],
+            currentNumber: '0.',
             topDisplay: '0.',
-            bottomDisplay: '0.'
+            bottomDisplay: '0.',
+            expression: '0'
           }) :
           Object.assign({}, state, {
             keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed, action.keyPressed],
+            currentNumber: [...state.currentNumber, action.keyPressed].join(''),
             topDisplay: [...state.keysPressed, action.keyPressed].join(''),
-            bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+            bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
+            expression: state.currentNumber
           });
       case 'ADDITION':
         return Object.assign({}, state, {
           keyPressed: action.keyPressed,
-          keysPressed: [],
+          keysPressed: [...state.keysPressed, action.keyPressed].join(''),
+          currentNumber: '0',
           topDisplay: ['0'],
-          bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+          bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
+          expression: state.expression
         });
       default:
         return state;
@@ -163,8 +172,10 @@ window.onload = () => {
   const initialState = {
     keyPressed: '',
     keysPressed: [],
+    currentNumber: '',
     topDisplay: '0',
-    bottomDisplay: '0'
+    bottomDisplay: '0',
+    expression: ''
   };
   const store = Redux.createStore(buttonPressed, initialState);
   store.subscribe(render);
