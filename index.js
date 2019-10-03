@@ -29,6 +29,9 @@ window.onload = () => {
       store.dispatch(addOperator(this.innerText));
     });
   });
+  document.querySelector(".open").addEventListener("click",function(){
+    store.dispatch(addLeftParenthesis(this.innerText));
+  });
 
   function buttonPressed(state, action) {
     if (typeof state === 'undefined') {
@@ -88,7 +91,7 @@ window.onload = () => {
             expression: state.bottomDisplay
           });
       case 'PERIOD':
-        return state.topDisplay.includes('.') ? state : state.topDisplay === '0' ?
+        return state.topDisplay.includes('.') ? state : state.bottomDisplay === '0' ?
           Object.assign({}, state, {
             keyPressed: action.keyPressed,
             keysPressed: ['0', '.'],
@@ -101,42 +104,38 @@ window.onload = () => {
             keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed, action.keyPressed],
             currentNumber: [...state.currentNumber, action.keyPressed].join(''),
-            topDisplay: [...state.keysPressed, action.keyPressed].join(''),
-            bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
+            topDisplay: [...state.topDisplay, action.keyPressed].join(''),
+            bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
             expression: state.currentNumber
           });
       case 'ADDOPERATOR':
-        return Object.assign({}, state, {
-          keyPressed: action.keyPressed,
-          keysPressed: [...state.keysPressed, action.keyPressed].join(''),
-          currentNumber: '0',
-          topDisplay: '0',
-          bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
-          expression: state.expression
-        });
+        return ['+', '-', 'X', '/', '('].includes(state.bottomDisplay.slice(-1)) ?
+          state :
+          Object.assign({}, state, {
+            keyPressed: action.keyPressed,
+            keysPressed: [...state.keysPressed, action.keyPressed].join(''),
+            currentNumber: '0',
+            topDisplay: '0',
+            bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
+            expression: state.expression
+          });
+      case 'ALP':
+        return ['X', '/', '+', '-', '('].includes(state.bottomDisplay.slice(-1)) ?
+          Object.assign({}, state, {
+            keyPressed: action.keyPressed,
+            keysPressed: [...state.keysPressed, action.keyPressed].join(''),
+            currentNumber: '0',
+            topDisplay: '0',
+            bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
+            expression: [...state.bottomDisplay, action.keyPressed].join('')
+          }) :
+          state;
+
       default:
         return state;
     }
   }
-  /*
-    function operatorReducer(state, action) {
-      if (typeof state === 'undefined') {
-        return 0;
-      }
-      switch (action.type) {
-        case 'ADDITION':
-          return Object.assign({}, state, {
-              keyPressed: action.keyPressed,
-              keysPressed: [...state.keysPressed, action.keyPressed],
-              bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
-            }
-          );
 
-        default:
-          return state;
-      }
-    }
-    */
 
   function addKey(key) {
     return {
@@ -179,21 +178,13 @@ window.onload = () => {
       keyPressed: key
     };
   }
-  /*
-    function addMultiply(key) {
-      return {
-        type: 'ADDOPERATOR',
-        keyPressed: key
-      };
-    }
-
-    function addDivider(key) {
-      return {
-        type: 'ADDOPERATOR',
-        keyPressed: key
-      };
-    }
-  */
+  
+  function addLeftParenthesis(key){
+    return {
+      type: 'ALP',
+      keyPressed: key
+    };
+  }
 
   function render() {
     document.getElementById("topNum").innerHTML = store.getState().topDisplay;
