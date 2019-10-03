@@ -24,8 +24,10 @@ window.onload = () => {
   document.querySelector(".period").addEventListener("click", function () {
     store.dispatch(addPeriod(this.innerText));
   });
-  document.querySelector(".add").addEventListener("click", function () {
-    store.dispatch(addPlus(this.innerText));
+  Array.from(document.querySelectorAll(".operator")).forEach(function (elem) {
+    elem.addEventListener("click", function () {
+      store.dispatch(addOperator(this.innerText));
+    });
   });
 
   function buttonPressed(state, action) {
@@ -64,10 +66,10 @@ window.onload = () => {
           Object.assign({}, state, {
             keyPressed: action.keyPressed,
             currentNumber: '0',
-            keysPressed: [...state.bottomDisplay.slice(0,-1)],
+            keysPressed: [...state.bottomDisplay.slice(0, -1)],
             topDisplay: '0',
-            bottomDisplay: state.bottomDisplay.slice(0,-1),
-            expression: state.bottomDisplay.slice(0,-2)
+            bottomDisplay: state.bottomDisplay.slice(0, -1),
+            expression: state.bottomDisplay.slice(0, -2)
           }) :
           Object.assign({}, state, {
             keyPressed: action.keyPressed,
@@ -103,7 +105,7 @@ window.onload = () => {
             bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
             expression: state.currentNumber
           });
-      case 'ADDITION':
+      case 'ADDOPERATOR':
         return Object.assign({}, state, {
           keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed].join(''),
@@ -171,13 +173,27 @@ window.onload = () => {
     };
   }
 
-  function addPlus(key) {
+  function addOperator(key) {
     return {
-      type: 'ADDITION',
+      type: 'ADDOPERATOR',
       keyPressed: key
     };
   }
+  /*
+    function addMultiply(key) {
+      return {
+        type: 'ADDOPERATOR',
+        keyPressed: key
+      };
+    }
 
+    function addDivider(key) {
+      return {
+        type: 'ADDOPERATOR',
+        keyPressed: key
+      };
+    }
+  */
 
   function render() {
     document.getElementById("topNum").innerHTML = store.getState().topDisplay;
