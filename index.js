@@ -29,10 +29,14 @@ window.onload = () => {
       store.dispatch(addOperator(this.innerText));
     });
   });
-  document.querySelector(".open").addEventListener("click",function(){
+  document.querySelector(".open").addEventListener("click", function () {
     store.dispatch(addLeftParenthesis(this.innerText));
   });
-
+  
+  document.querySelector(".close").addEventListener("click", function () {
+    store.dispatch(addRightParenthesis(this.innerText));
+  });
+ 
   function buttonPressed(state, action) {
     if (typeof state === 'undefined') {
       return 0;
@@ -130,7 +134,17 @@ window.onload = () => {
             expression: [...state.bottomDisplay, action.keyPressed].join('')
           }) :
           state;
-
+      case 'ARP':
+        return ['X', '/', '+', '-', '(', ')'].includes(state.bottomDisplay.slice(-1)) ?
+          state :
+          Object.assign({}, state, {
+            keyPressed: action.keyPressed,
+            keysPressed: [...state.keysPressed, action.keyPressed].join(''),
+            currentNumber: '0',
+            topDisplay: '0',
+            bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
+            expression: [...state.bottomDisplay, action.keyPressed].join('')
+          });
       default:
         return state;
     }
@@ -178,13 +192,21 @@ window.onload = () => {
       keyPressed: key
     };
   }
-  
-  function addLeftParenthesis(key){
+
+  function addLeftParenthesis(key) {
     return {
       type: 'ALP',
       keyPressed: key
     };
   }
+
+  function addRightParenthesis(key) {
+    return {
+      type: 'ARP',
+      keyPressed: key
+    };
+  }
+
 
   function render() {
     document.getElementById("topNum").innerHTML = store.getState().topDisplay;
