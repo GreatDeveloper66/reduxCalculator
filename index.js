@@ -34,7 +34,13 @@ window.onload = () => {
     }
     switch (action.type) {
       case 'ADD':
-        return Object.assign({}, state, {
+        return state.topDisplay === '0' ? Object.assign({}, state, {
+          keyPressed: action.keyPressed,
+          keysPressed: [...state.keysPressed, action.keyPressed].join(''),
+          currentNumber: action.keyPressed,
+          topDisplay: action.keyPressed,
+          bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+        }) : Object.assign({}, state, {
           keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed],
           currentNumber: [...state.currentNumber, action.keyPressed].join(''),
@@ -46,26 +52,35 @@ window.onload = () => {
         return state.topDisplay === '0' ? state : Object.assign({}, state, {
           keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed],
-          currentNumber: [...state.currentNumber,action.keyPressed].join(''),
+          currentNumber: [...state.currentNumber, action.keyPressed].join(''),
           topDisplay: [...state.keysPressed, action.keyPressed].join(''),
           bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
-          expression: [...state.keysPressed,action.keyPressed].join('')
+          expression: [...state.keysPressed, action.keyPressed].join('')
         });
       case 'ERASE':
         return initialState;
       case 'BSPACE':
-        return state.topDisplay.length === 1 ? Object.assign({}, state, {
+        return state.topDisplay.length === 1 ? state.bottomDisplay.length > 1 ?
+          Object.assign({}, state, {
             keyPressed: action.keyPressed,
             currentNumber: '0',
-            keysPressed: [...state.bottomDisplay],
+            keysPressed: [...state.bottomDisplay.slice(0,-1)],
+            topDisplay: '0',
+            bottomDisplay: state.bottomDisplay.slice(0,-1),
+            expression: state.bottomDisplay.slice(0,-2)
+          }) :
+          Object.assign({}, state, {
+            keyPressed: action.keyPressed,
+            currentNumber: '0',
+            keysPressed: [],
             topDisplay: '0',
             bottomDisplay: '0',
-            expression: state.expression
+            expression: '0'
           }) :
           Object.assign({}, state, {
             keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed.slice(0, -1)],
-            currentNumber: [...state.currentNumber.slice(0,-1)],
+            currentNumber: [...state.currentNumber.slice(0, -1)],
             topDisplay: state.topDisplay.slice(0, -1),
             bottomDisplay: state.bottomDisplay.slice(0, -1),
             expression: state.bottomDisplay
@@ -93,7 +108,7 @@ window.onload = () => {
           keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed].join(''),
           currentNumber: '0',
-          topDisplay: ['0'],
+          topDisplay: '0',
           bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
           expression: state.expression
         });
