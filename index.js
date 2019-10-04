@@ -48,7 +48,8 @@ window.onload = () => {
           keysPressed: [...state.keysPressed, action.keyPressed].join(''),
           currentNumber: action.keyPressed,
           topDisplay: action.keyPressed,
-          bottomDisplay: [...state.keysPressed, action.keyPressed].join('')
+          bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
+          expression: [...state.keysPressed, action.keyPressed].join('')
         }) : Object.assign({}, state, {
           keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed],

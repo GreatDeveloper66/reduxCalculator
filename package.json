@@ -23,5 +23,6 @@
   "homepage": "https://github.com/GreatDeveloper66/reduxCalculator#readme",
   "dependencies": {
     "sass": "^1.22.12"
-  }
+  },
+  "devDependencies": {}
 }
