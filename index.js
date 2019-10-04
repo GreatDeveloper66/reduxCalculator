@@ -5,6 +5,7 @@
 /*global window*/
 /*jshint esversion:6*/
 /*global console*/
+/*global stringMath*/
 
 window.onload = () => {
   Array.from(document.querySelectorAll('.numeral')).forEach(function (elem) {
@@ -32,9 +33,11 @@ window.onload = () => {
   document.querySelector(".open").addEventListener("click", function () {
     store.dispatch(addLeftParenthesis(this.innerText));
   });
-  
   document.querySelector(".close").addEventListener("click", function () {
     store.dispatch(addRightParenthesis(this.innerText));
+  });
+  document.querySelector(".equals").addEventListener("click",function(){
+    store.dispatch(equals(this.innerText));
   });
  
   function buttonPressed(state, action) {
@@ -146,6 +149,16 @@ window.onload = () => {
             bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
             expression: [...state.bottomDisplay, action.keyPressed].join('')
           });
+      case 'EQUALS':
+        const answer = stringMath(state.expression);
+        return Object.assign({},state,{
+          keyPressed: action.keyPressed,
+          keysPressed: [...state.keysPressed, action.keyPressed].join(''),
+          currentNumber: answer,
+          topDisplay: answer,
+          bottomDisplay: answer,
+          expression: answer
+        });
       default:
         return state;
     }
@@ -207,7 +220,12 @@ window.onload = () => {
       keyPressed: key
     };
   }
-
+  function equals(key){
+    return {
+      type: 'EQUALS',
+      keyPressed: key
+    };
+  }
 
   function render() {
     document.getElementById("topNum").innerHTML = store.getState().topDisplay;
