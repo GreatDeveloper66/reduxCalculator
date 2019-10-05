@@ -47,14 +47,12 @@ window.onload = () => {
     switch (action.type) {
       case 'ADD':
         return state.topDisplay === '0' ? Object.assign({}, state, {
-          keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed].join(''),
           currentNumber: action.keyPressed,
           topDisplay: action.keyPressed,
           bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
           expression: [...state.keysPressed, action.keyPressed].join('')
         }) : Object.assign({}, state, {
-          keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed],
           currentNumber: [...state.currentNumber, action.keyPressed].join(''),
           topDisplay: [...state.currentNumber, action.keyPressed].join(''),
@@ -63,7 +61,6 @@ window.onload = () => {
         });
       case 'ADDZERO':
         return state.topDisplay === '0' ? state : Object.assign({}, state, {
-          keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed],
           currentNumber: [...state.currentNumber, action.keyPressed].join(''),
           topDisplay: [...state.keysPressed, action.keyPressed].join(''),
@@ -75,7 +72,6 @@ window.onload = () => {
       case 'BSPACE':
         return state.topDisplay.length === 1 ? state.bottomDisplay.length > 1 ?
           Object.assign({}, state, {
-            keyPressed: action.keyPressed,
             currentNumber: '0',
             keysPressed: [...state.bottomDisplay.slice(0, -1)],
             topDisplay: '0',
@@ -83,7 +79,6 @@ window.onload = () => {
             expression: state.bottomDisplay.slice(0, -2)
           }) :
           Object.assign({}, state, {
-            keyPressed: action.keyPressed,
             currentNumber: '0',
             keysPressed: [],
             topDisplay: '0',
@@ -91,7 +86,6 @@ window.onload = () => {
             expression: '0'
           }) :
           Object.assign({}, state, {
-            keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed.slice(0, -1)],
             currentNumber: [...state.currentNumber.slice(0, -1)],
             topDisplay: state.topDisplay.slice(0, -1),
@@ -101,7 +95,6 @@ window.onload = () => {
       case 'PERIOD':
         return state.topDisplay.includes('.') ? state : state.bottomDisplay === '0' ?
           Object.assign({}, state, {
-            keyPressed: action.keyPressed,
             keysPressed: ['0', '.'],
             currentNumber: '0.',
             topDisplay: '0.',
@@ -109,7 +102,6 @@ window.onload = () => {
             expression: '0'
           }) :
           Object.assign({}, state, {
-            keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed, action.keyPressed],
             currentNumber: [...state.currentNumber, action.keyPressed].join(''),
             topDisplay: [...state.topDisplay, action.keyPressed].join(''),
@@ -120,7 +112,6 @@ window.onload = () => {
         return ['+', '-', 'X', '/', '('].includes(state.bottomDisplay.slice(-1)) ?
           state :
           Object.assign({}, state, {
-            keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed, action.keyPressed].join(''),
             currentNumber: '0',
             topDisplay: '0',
@@ -130,7 +121,6 @@ window.onload = () => {
       case 'ALP':
         return ['X', '/', '+', '-', '('].includes(state.bottomDisplay.slice(-1)) ?
           Object.assign({}, state, {
-            keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed, action.keyPressed].join(''),
             currentNumber: '0',
             topDisplay: '0',
@@ -142,7 +132,6 @@ window.onload = () => {
         return ['X', '/', '+', '-', '(', ')'].includes(state.bottomDisplay.slice(-1)) ?
           state :
           Object.assign({}, state, {
-            keyPressed: action.keyPressed,
             keysPressed: [...state.keysPressed, action.keyPressed].join(''),
             currentNumber: '0',
             topDisplay: '0',
@@ -152,7 +141,6 @@ window.onload = () => {
       case 'EQUALS':
         const answer = stringMath(state.expression);
         return Object.assign({},state,{
-          keyPressed: action.keyPressed,
           keysPressed: [...state.keysPressed, action.keyPressed].join(''),
           currentNumber: answer,
           topDisplay: answer,
@@ -233,7 +221,6 @@ window.onload = () => {
   }
 
   const initialState = {
-    keyPressed: '',
     keysPressed: [],
     currentNumber: '',
     topDisplay: '0',
@@ -244,71 +231,3 @@ window.onload = () => {
   store.subscribe(render);
 
 };
-
-/*
-window.onload = () => {
-
-  function counter(state, action) {
-    if (typeof state === 'undefined') {
-      return 0;
-    }
-
-    switch (action.type) {
-      case 'INCREMENT':
-        return state + 1;
-      case 'DECREMENT':
-        return state - 1;
-      default:
-        return state;
-    }
-  }
-
-  var store = Redux.createStore(counter);
-  var valueEl = document.getElementById('value');
-
-  function render() {
-    valueEl.innerHTML = store.getState().toString();
-  }
-
-  render();
-  store.subscribe(render);
-
-  document.getElementById('increment')
-    .addEventListener('click', function () {
-      store.dispatch({
-        type: 'INCREMENT'
-      });
-    });
-
-  document.getElementById('decrement')
-    .addEventListener('click', function () {
-      store.dispatch({
-        type: 'DECREMENT'
-      });
-    });
-
-  document.getElementById('incrementIfOdd')
-    .addEventListener('click', function () {
-      if (store.getState() % 2 !== 0) {
-        store.dispatch({
-          type: 'INCREMENT'
-        });
-      }
-    });
-
-  document.getElementById('incrementAsync')
-    .addEventListener('click', function () {
-      setTimeout(function () {
-        store.dispatch({
-          type: 'INCREMENT'
-        });
-      }, 1000);
-    });
-
-
-
-
-
-
-};
-*/
