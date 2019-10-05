@@ -36,10 +36,10 @@ window.onload = () => {
   document.querySelector(".close").addEventListener("click", function () {
     store.dispatch(addRightParenthesis(this.innerText));
   });
-  document.querySelector(".equals").addEventListener("click",function(){
+  document.querySelector(".equals").addEventListener("click", function () {
     store.dispatch(equals(this.innerText));
   });
- 
+
   function buttonPressed(state, action) {
     if (typeof state === 'undefined') {
       return 0;
@@ -47,41 +47,35 @@ window.onload = () => {
     switch (action.type) {
       case 'ADD':
         return state.topDisplay === '0' ? Object.assign({}, state, {
-          keysPressed: [...state.keysPressed, action.keyPressed].join(''),
           topDisplay: action.keyPressed,
-          bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
-          expression: [...state.keysPressed, action.keyPressed].join('')
+          bottomDisplay: (state.bottomDisplay === '0' ? action.keyPressed : [...state.bottomDisplay, action.keyPressed].join('')),
+          expression: (state.bottomDisplay === '0' ? action.keyPressed : [...state.bottomDisplay, action.keyPressed].join(''))
         }) : Object.assign({}, state, {
-          keysPressed: [...state.keysPressed, action.keyPressed],
           topDisplay: [...state.topDisplay, action.keyPressed].join(''),
-          bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
-          expression: [...state.keysPressed, action.keyPressed].join('')
+          bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
+          expression: [...state.expression, action.keyPressed].join('')
         });
       case 'ADDZERO':
         return state.topDisplay === '0' ? state : Object.assign({}, state, {
-          keysPressed: [...state.keysPressed, action.keyPressed],
-          topDisplay: [...state.keysPressed, action.keyPressed].join(''),
-          bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
-          expression: [...state.keysPressed, action.keyPressed].join('')
+          topDisplay: [...state.topDisplay, action.keyPressed].join(''),
+          bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
+          expression: [...state.expression, action.keyPressed].join('')
         });
       case 'ERASE':
         return initialState;
       case 'BSPACE':
         return state.topDisplay.length === 1 ? state.bottomDisplay.length > 1 ?
           Object.assign({}, state, {
-            keysPressed: [...state.bottomDisplay.slice(0, -1)],
             topDisplay: '0',
             bottomDisplay: state.bottomDisplay.slice(0, -1),
             expression: state.bottomDisplay.slice(0, -2)
           }) :
           Object.assign({}, state, {
-            keysPressed: [],
             topDisplay: '0',
             bottomDisplay: '0',
             expression: '0'
           }) :
           Object.assign({}, state, {
-            keysPressed: [...state.keysPressed.slice(0, -1)],
             topDisplay: state.topDisplay.slice(0, -1),
             bottomDisplay: state.bottomDisplay.slice(0, -1),
             expression: state.bottomDisplay
@@ -89,13 +83,11 @@ window.onload = () => {
       case 'PERIOD':
         return state.topDisplay.includes('.') ? state : state.bottomDisplay === '0' ?
           Object.assign({}, state, {
-            keysPressed: ['0', '.'],
             topDisplay: '0.',
             bottomDisplay: '0.',
             expression: '0'
           }) :
           Object.assign({}, state, {
-            keysPressed: [...state.keysPressed, action.keyPressed],
             topDisplay: [...state.topDisplay, action.keyPressed].join(''),
             bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
             expression: state.expression
@@ -104,15 +96,13 @@ window.onload = () => {
         return ['+', '-', 'X', '/', '('].includes(state.bottomDisplay.slice(-1)) ?
           state :
           Object.assign({}, state, {
-            keysPressed: [...state.keysPressed, action.keyPressed].join(''),
             topDisplay: '0',
-            bottomDisplay: [...state.keysPressed, action.keyPressed].join(''),
+            bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
             expression: state.expression
           });
       case 'ALP':
         return ['X', '/', '+', '-', '('].includes(state.bottomDisplay.slice(-1)) ?
           Object.assign({}, state, {
-            keysPressed: [...state.keysPressed, action.keyPressed].join(''),
             topDisplay: '0',
             bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
             expression: [...state.bottomDisplay, action.keyPressed].join('')
@@ -122,18 +112,16 @@ window.onload = () => {
         return ['X', '/', '+', '-', '(', ')'].includes(state.bottomDisplay.slice(-1)) ?
           state :
           Object.assign({}, state, {
-            keysPressed: [...state.keysPressed, action.keyPressed].join(''),
             topDisplay: '0',
             bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
             expression: [...state.bottomDisplay, action.keyPressed].join('')
           });
       case 'EQUALS':
         const answer = stringMath(state.expression);
-        return Object.assign({},state,{
-          keysPressed: [...state.keysPressed, action.keyPressed].join(''),
-          topDisplay: answer,
-          bottomDisplay: answer,
-          expression: answer
+        return Object.assign({}, state, {
+          topDisplay: answer.toString(),
+          bottomDisplay: answer.toString(),
+          expression: answer.toString()
         });
       default:
         return state;
@@ -196,7 +184,8 @@ window.onload = () => {
       keyPressed: key
     };
   }
-  function equals(key){
+
+  function equals(key) {
     return {
       type: 'EQUALS',
       keyPressed: key
