@@ -41,13 +41,13 @@ window.onload = () => {
   });
 
   function buttonPressed(state, action) {
-    const over = state.bottomDisplay.length >= 14 || state.topDisplay.length >= 36;
+    const over = state.bottomDisplay.length >= 36 || state.topDisplay.length >= 14;
     if (typeof state === 'undefined') {
       return 0;
     }
     switch (action.type) {
       case 'ADD':
-        return state.topDisplay === '0' ? Object.assign({}, state, {
+        return over ? state: state.topDisplay === '0' ? Object.assign({}, state, {
           topDisplay: action.keyPressed,
           bottomDisplay: (state.bottomDisplay === '0' ? action.keyPressed : [...state.bottomDisplay, action.keyPressed].join('')),
           expression: (state.bottomDisplay === '0' ? action.keyPressed : [...state.bottomDisplay, action.keyPressed].join(''))
@@ -57,7 +57,7 @@ window.onload = () => {
           expression: [...state.expression, action.keyPressed].join('')
         });
       case 'ADDZERO':
-        return state.topDisplay === '0' ? state : Object.assign({}, state, {
+        return over ? state : state.topDisplay === '0' ? state : Object.assign({}, state, {
           topDisplay: [...state.topDisplay, action.keyPressed].join(''),
           bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
           expression: [...state.expression, action.keyPressed].join('')
@@ -82,7 +82,7 @@ window.onload = () => {
             expression: state.bottomDisplay
           });
       case 'PERIOD':
-        return state.topDisplay.includes('.') ? state : state.bottomDisplay === '0' ?
+        return over ? state: state.topDisplay.includes('.') ? state : state.bottomDisplay === '0' ?
           Object.assign({}, state, {
             topDisplay: '0.',
             bottomDisplay: '0.',
@@ -94,7 +94,7 @@ window.onload = () => {
             expression: state.expression
           });
       case 'ADDOPERATOR':
-        return ['+', '-', 'X', '/', '('].includes(state.bottomDisplay.slice(-1)) ?
+        return over ? state : ['+', '-', 'X', '/', '('].includes(state.bottomDisplay.slice(-1)) ?
           state :
           Object.assign({}, state, {
             topDisplay: '0',
@@ -102,7 +102,7 @@ window.onload = () => {
             expression: state.expression
           });
       case 'ALP':
-        return ['X', '/', '+', '-', '('].includes(state.bottomDisplay.slice(-1)) ?
+        return over ? state : ['X', '/', '+', '-', '('].includes(state.bottomDisplay.slice(-1)) ?
           Object.assign({}, state, {
             topDisplay: '0',
             bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
@@ -110,7 +110,7 @@ window.onload = () => {
           }) :
           state;
       case 'ARP':
-        return ['X', '/', '+', '-', '(', ')'].includes(state.bottomDisplay.slice(-1)) ?
+        return over ? state : ['X', '/', '+', '-', '(', ')'].includes(state.bottomDisplay.slice(-1)) ?
           state :
           Object.assign({}, state, {
             topDisplay: '0',
@@ -118,11 +118,11 @@ window.onload = () => {
             expression: [...state.bottomDisplay, action.keyPressed].join('')
           });
       case 'EQUALS':
-        const answer = stringMath(state.expression);
+        const answer = stringMath(state.expression).toString();
         return Object.assign({}, state, {
-          topDisplay: answer.toString(),
-          bottomDisplay: answer.toString(),
-          expression: answer.toString()
+          topDisplay: answer,
+          bottomDisplay: answer,
+          expression: answer
         });
       default:
         return state;
