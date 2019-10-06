@@ -41,6 +41,7 @@ window.onload = () => {
   });
 
   function buttonPressed(state, action) {
+    const over = state.bottomDisplay.length >= 14 || state.topDisplay.length >= 36;
     if (typeof state === 'undefined') {
       return 0;
     }

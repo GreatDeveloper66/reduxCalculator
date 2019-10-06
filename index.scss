@@ -50,7 +50,7 @@ body {
 }
 .heading {
   h1 {
-    @include fonts(var(--headingFont),24px,var(--headingBlack));
+    @include fonts(var(--headingFont),22px,var(--headingBlack));
     text-align:center;
     text-transform: uppercase;
     margin: 0 auto 0 auto;
