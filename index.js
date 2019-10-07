@@ -119,6 +119,16 @@ window.onload = () => {
           });
       case 'EQUALS':
         const answer = stringMath(state.expression).toString();
+        
+        if(parseInt(answer) > 9999999999999){
+          answer = "-E-"
+        } 
+        else if(answer.length >= 14){
+          answer = answer.slice(0,14);
+        }
+        else {
+    
+        }
         return Object.assign({}, state, {
           topDisplay: answer,
           bottomDisplay: answer,
