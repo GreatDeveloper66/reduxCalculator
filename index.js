@@ -118,7 +118,7 @@ window.onload = () => {
             expression: [...state.bottomDisplay, action.keyPressed].join('')
           });
       case 'EQUALS':
-        const answer = stringMath(state.expression).toString();
+        const answer = stringMath(state.expression.replace("X","*")).toString();
         
         if(parseInt(answer) > 9999999999999){
           answer = "-E-"
