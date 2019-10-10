@@ -42,6 +42,8 @@ window.onload = () => {
 
   function buttonPressed(state, action) {
     const over = state.bottomDisplay.length >= 36 || state.topDisplay.length >= 14;
+    const overbottom = state.bottomDisplay.length >= 36;
+    
     if (typeof state === 'undefined') {
       return 0;
     }
@@ -79,7 +81,7 @@ window.onload = () => {
           Object.assign({}, state, {
             topDisplay: state.topDisplay.slice(0, -1),
             bottomDisplay: state.bottomDisplay.slice(0, -1),
-            expression: state.bottomDisplay
+            expression: state.bottomDisplay.slice(0,-1)
           });
       case 'PERIOD':
         return over ? state: state.topDisplay.includes('.') ? state : state.bottomDisplay === '0' ?
@@ -94,7 +96,7 @@ window.onload = () => {
             expression: state.expression
           });
       case 'ADDOPERATOR':
-        return over ? state : ['+', '-', 'X', '/', '('].includes(state.bottomDisplay.slice(-1)) ?
+        return overbottom ? state : ['+', '-', 'X', '/', '('].includes(state.bottomDisplay.slice(-1)) ?
           state :
           Object.assign({}, state, {
             topDisplay: '0',
@@ -102,7 +104,7 @@ window.onload = () => {
             expression: state.expression
           });
       case 'ALP':
-        return over ? state : ['X', '/', '+', '-', '('].includes(state.bottomDisplay.slice(-1)) ?
+        return overbottom ? state : ['X', '/', '+', '-', '('].includes(state.bottomDisplay.slice(-1)) ?
           Object.assign({}, state, {
             topDisplay: '0',
             bottomDisplay: [...state.bottomDisplay, action.keyPressed].join(''),
@@ -110,7 +112,7 @@ window.onload = () => {
           }) :
           state;
       case 'ARP':
-        return over ? state : ['X', '/', '+', '-', '(', ')'].includes(state.bottomDisplay.slice(-1)) ?
+        return overbottom ? state : ['X', '/', '+', '-', '(', ')'].includes(state.bottomDisplay.slice(-1)) ?
           state :
           Object.assign({}, state, {
             topDisplay: '0',
@@ -118,7 +120,7 @@ window.onload = () => {
             expression: [...state.bottomDisplay, action.keyPressed].join('')
           });
       case 'EQUALS':
-        const answer = stringMath(state.expression.replace("X","*")).toString();
+        let answer = stringMath(state.expression.replace("X","*")).toString();
         
         if(parseInt(answer) > 9999999999999){
           answer = "-E-"
