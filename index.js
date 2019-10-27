@@ -43,7 +43,7 @@ window.onload = () => {
   function buttonPressed(state, action) {
     const over = state.bottomDisplay.length >= 36 || state.topDisplay.length >= 14;
     const overbottom = state.bottomDisplay.length >= 36;
-    
+
     if (typeof state === 'undefined') {
       return 0;
     }
@@ -121,16 +121,17 @@ window.onload = () => {
           });
       case 'EQUALS':
         let answer = stringMath(state.expression.replace("X","*")).toString();
-        
+        /*
         if(parseInt(answer) > 9999999999999){
           answer = "-E-"
-        } 
+        }
         else if(answer.length >= 14){
           answer = answer.slice(0,14);
         }
         else {
-    
+
         }
+        */
         return Object.assign({}, state, {
           topDisplay: answer,
           bottomDisplay: answer,

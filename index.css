@@ -131,7 +131,8 @@ body {
   width: 90%;
   height: 90%;
   margin: 2px;
-  padding: 2px; }
+  padding: 2px;
+  overflow: hidden; }
   /* line 105, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
   .topDisplay p {
     margin: auto;
@@ -150,7 +151,8 @@ body {
   width: 90%;
   height: 90%;
   margin: 1px;
-  padding: 1px; }
+  padding: 1px;
+  overflow: hidden; }
   /* line 115, /Users/adam/Desktop/My_Documents/Coding/Projects/reduxCalculator/index.scss */
   .bottomDisplay p {
     margin: auto;

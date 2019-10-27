@@ -65,7 +65,7 @@ body {
   @extend .genericDisplay;
   @extend .genericSizing;
 }
-.userBoard{ 
+.userBoard{
   @include display(1fr 4fr/1fr, center, center);
   @include sizing(90%,95%,3px,3px);
   border-radius: 15px;
@@ -100,7 +100,8 @@ body {
 }
 .topDisplay{
   @include display(1fr/1fr,end,center);
-  
+  overflow: hidden;
+
   @include sizing(90%,90%,2px,2px);
   p{
     margin: auto;
@@ -112,11 +113,12 @@ body {
 .bottomDisplay {
   @include display(1fr/1fr,end,center);
   @include sizing(90%,90%,1px,1px);
+  overflow: hidden;
   p {
     margin: auto;
     margin-right: 0;
     line-height: 10px;
     @include fonts(var(--numFont),10px,var(--headingBlack));
-    
+
   }
 }
