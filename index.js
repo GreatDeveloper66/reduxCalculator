@@ -74,6 +74,8 @@ window.onload = () => {
   function buttonPressed(state, action) {
     const over = state.bottomDisplay.length >= 36 || state.topDisplay.length >= 14;
     const overbottom = state.bottomDisplay.length >= 36;
+	const lastDigit = state.topDisplay.slice(-1);
+	const lastBDigit = state.bottomDisplay.slice(-1);
 
     if (typeof state === 'undefined') {
       return 0;
