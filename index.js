@@ -39,10 +39,43 @@ window.onload = () => {
   document.querySelector(".equals").addEventListener("click", function () {
     store.dispatch(equals(this.innerText));
   });
+  
+  document.querySelector(".power").addEventListener("click", function(){
+	  store.dispatch(power(this.innerText));
+  });
+   document.querySelector(".squareroot").addEventListener("click", function(){
+	  store.dispatch(squareroot(this.innerText));
+  });
+  document.querySelector(".cuberoot").addEventListener("click", function(){
+	  store.dispatch(cuberoot(this.innerText));
+  });
+  
+  document.querySelector(".percentage").addEventListener("click", function(){
+	  store.dispatch(percentage(this.innerText));
+  });
+  
+  document.querySelector(".sin").addEventListener("click", function(){
+	  store.dispatch(sin(this.innerText));
+  });
+  
+  document.querySelector(".cos").addEventListener("click", function(){
+	  store.dispatch(cos(this.innerText));
+  });
+  
+  document.querySelector(".tan").addEventListener("click", function(){
+	  store.dispatch(squareroot(this.innerText));
+  });
+  
+  document.querySelector(".pi").addEventListener("click", function(){
+	  store.dispatch(pi(this.innerText));
+  });
+  
 
   function buttonPressed(state, action) {
     const over = state.bottomDisplay.length >= 36 || state.topDisplay.length >= 14;
     const overbottom = state.bottomDisplay.length >= 36;
+	const lastDigit = state.topDisplay.slice(-1);
+	const lastBDigit = state.bottomDisplay.slice(-1);
 
     if (typeof state === 'undefined') {
       return 0;
@@ -199,6 +232,64 @@ window.onload = () => {
       keyPressed: key
     };
   }
+  
+  function power(key) {
+	  return {
+		type: 'POWER',
+		keyPressed: key
+	  }
+  }
+  
+  function squareroot(key) {
+	  return {
+		type: 'SQUAREROOT',
+		keyPressed: key
+	  }
+  }
+  
+  function cuberoot(key) {
+	  return {
+		type: 'CUBEROOT',
+		keyPressed: key
+	  }
+  }
+  
+  function percentage(key) {
+	  return {
+		type: 'PERCENTAGE',
+		keyPressed: key
+	  }
+  }
+  
+  function sin(key) {
+	  return {
+		type: 'SIN',
+		keyPressed: key
+	  }
+  }
+  
+  function cos(key) {
+	  return {
+		type: 'COS',
+		keyPressed: key
+	  }
+  }
+  
+  function tan(key) {
+	  return {
+		type: 'TAN',
+		keyPressed: key
+	  }
+  }
+  
+  function pi(key) {
+	  return {
+		type: 'PI',
+		keyPressed: key
+	  }
+  }
+  
+  sin,cos,tan,pi
 
   function render() {
     document.getElementById("topNum").innerHTML = store.getState().topDisplay;
