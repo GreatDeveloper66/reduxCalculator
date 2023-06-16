@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/GreatDeveloper66/reduxCalculator#readme",
   "dependencies": {
+    "dotenv": "^16.3.0",
     "sass": "^1.22.12",
-    "string-math": "^1.2.1"
-  },
-  "devDependencies": {}
+    "string-math": "^1.2.2"
+  }
 }
