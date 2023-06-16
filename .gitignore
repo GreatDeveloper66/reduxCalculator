@@ -22,4 +22,5 @@ cabal.project.local~
 .ghc.environment.*
 node_modules/
 package-lock.json
+.env
 ```
